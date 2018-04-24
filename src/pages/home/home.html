@@ -1,14 +1,43 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button clear icon-right (click)="signOut()">
+        <ion-icon name="md-power"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-fab right bottom>
+    <button ion-fab color="secondary" (click)="gotoAddNew()"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
+  <button ion-button small outline (click)="getAllAddress()" type="submit">Show All</button>
+  <div *ngIf="allAddress?.length > 0">
+    <ion-card *ngFor="let item of allAddress">
+      <ion-card-content>
+        <ion-card-title>
+          {{item.data().name}}
+        </ion-card-title>
+        <p>
+          {{item.data().addrln1}}, {{item.data().addrln2}},
+        </p>
+        <p>
+          {{item.data().locality}}, {{item.data().city}} - {{item.data().pincode}}
+        </p>
+        <p>
+          <ion-icon name="md-call"></ion-icon> - {{item.data().landline}}  <ion-icon name="md-star"></ion-icon>  <ion-icon name="md-phone-portrait"></ion-icon> - {{item.data().mobile}}
+        </p>
+        <p>
+          Email - {{item.data().email}}
+        </p>
+        <button ion-button clear small class="card-button card-bin" (click)="deleteAdd(item.id)" color="danger"><ion-icon name="md-trash"></ion-icon><!-- Delete--></button>
+        <button ion-button clear small class="card-button card-edit"  (click)="editAdd(item)" color="secondary"><ion-icon name="ios-create-outline"></ion-icon><!-- Edit--></button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="allAddress?.length == 0">
+    <p><strong>No cards to display right now</strong></p>
+  </div>
 </ion-content>
