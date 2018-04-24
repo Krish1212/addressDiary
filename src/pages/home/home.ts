@@ -24,7 +24,7 @@ export class HomePage {
     this.navCtrl.setRoot('login');
   }
   gotoAddNew(){
-    //this.navCtrl.parent.select(1);
+    this.navCtrl.push('add-new');
   }
   getAllAddress(){
     this.loading = this.loadingCtrl.create({
@@ -107,6 +107,7 @@ export class HomePage {
       message: 'Edit record having: ' + address['id'],
       duration: 2000
     }).present();
+    this.navCtrl.push('edit-add');
   }
 
 }

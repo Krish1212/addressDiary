@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Add New Address
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="addNewForm" novalidate>
+    <ion-item>
+      <ion-input #name formControlName="name" type="text" placeholder="Name" [class.invalid]="!addNewForm.controls.name.valid && addNewForm.controls.name.touched"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="addNewForm.controls.name.hasError('required') && addNewForm.controls.name.touched">
+      Name is required
+    </ion-item>
+    <ion-item>
+      <ion-input #addrln1 formControlName="addrln1" type="text" placeholder="Address Line 1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input #addrln2 formControlName="addrln2" type="text" placeholder="Address Line 2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input #locality formControlName="locality" type="text" placeholder="Locality" [class.invalid]="!addNewForm.controls.locality.valid && addNewForm.controls.locality.touched"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="addNewForm.controls.locality.hasError('required') && addNewForm.controls.locality.touched">
+      Locality or Area is required
+    </ion-item>
+    <ion-item>
+      <ion-input #city formControlName="city" type="text" placeholder="City/Country" [class.invalid]="!addNewForm.controls.city.valid && addNewForm.controls.city.touched"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="addNewForm.controls.city.hasError('required') && addNewForm.controls.city.touched">
+      City, State and/or Country is required
+    </ion-item>
+    <ion-item>
+      <ion-input #pincode formControlName="pincode" type="text" placeholder="Pincode" [class.invalid]="!addNewForm.controls.pincode.valid && addNewForm.controls.pincode.touched"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="addNewForm.controls.pincode.hasError('required') && addNewForm.controls.pincode.touched">
+      Pincode or Zipcode is required
+    </ion-item>
+    <ion-item class="error-message" *ngIf="addNewForm.controls.pincode.hasError('invalidPincode') && addNewForm.controls.pincode.touched">
+      Pincode or Zipcode should be 6 characters long
+    </ion-item>
+    <ion-item>
+      <ion-input #landline formControlName="landline" type="text" placeholder="Landline"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input #mobile formControlName="mobile" type="text" placeholder="Mobile" [class.invalid]="!addNewForm.controls.mobile.valid && addNewForm.controls.mobile.touched"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="addNewForm.controls.mobile.hasError('required') && addNewForm.controls.mobile.touched">
+      Mobile number is required
+    </ion-item>
+    <ion-item class="error-message" *ngIf="addNewForm.controls.mobile.hasError('invalidPhone') && addNewForm.controls.mobile.touched">
+      Mobile number should be 10 characters long
+    </ion-item>
+    <ion-item>
+      <ion-input #email formControlName="email" type="email" placeholder="Email"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="addNewForm.controls.email.hasError('invalidEmail') && addNewForm.controls.email.touched">
+      Enter a valid email address
+    </ion-item>
+    <button ion-button small block (click)="addNew()" type="submit" [disabled]="!addNewForm.valid">Add New</button>
+    <button ion-button small block outline (click)="resetForm()" item-start>Reset</button>
+  </form>
+</ion-content>
