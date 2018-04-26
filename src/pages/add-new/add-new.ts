@@ -61,7 +61,7 @@ export class AddNewPage {
         spinner: 'bubbles',
       });
       if(this.addNewForm.valid){
-        this.address = {'name':this.name.value,'addrln1':this.addrln1.value,'addrln2':this.addrln2.value,'locality':this.locality.value,'city':this.city.value,'pincode':this.pincode.value,'landline':this.landline.value,'mobile':this.mobile.value,'email':this.email.value,"deleted":false};
+        this.address = {'name':this.name.value,'addrln1':this.addrln1.value,'addrln2':this.addrln2.value,'locality':this.locality.value,'city':this.city.value,'pincode':this.pincode.value,'landline':this.landline.value,'mobile':this.mobile.value,'email':this.email.value,"deleted":false, "favourite":false};
         this.adProvider.addNewAddress(this.address).subscribe(addr => {
           if(addr) {
             this.loading.dismiss().then(() => {
