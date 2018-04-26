@@ -1,12 +1,52 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>editAdd</ion-title>
+    <ion-title>Edit Address</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <p><strong>Edit the address and click the save button</strong></p>
+  <div *ngIf="eAddress">
+    <ion-item>
+      <ion-label stacked>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="eAddress.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Address Line 1</ion-label>
+      <ion-input type="text" [(ngModel)]="eAddress.addrln1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Address Line 2</ion-label>
+      <ion-input type="text" [(ngModel)]="eAddress.addrln2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Locality</ion-label>
+      <ion-input type="text" [(ngModel)]="eAddress.locality"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>City</ion-label>
+      <ion-input type="text" [(ngModel)]="eAddress.city"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Pincode</ion-label>
+      <ion-input type="text" [(ngModel)]="eAddress.pincode"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Landline</ion-label>
+      <ion-input type="text" [(ngModel)]="eAddress.landline"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Mobile</ion-label>
+      <ion-input type="text" [(ngModel)]="eAddress.mobile"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="eAddress.email"></ion-input>
+    </ion-item>
+    <button ion-button block color="primary" (click)="saveEdit()">Save</button>
+    <button ion-button block outline (click)="cancelEdit()">Cancel</button>
+  </div>
 </ion-content>

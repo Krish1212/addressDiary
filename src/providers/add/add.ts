@@ -42,11 +42,11 @@ export class AddProvider {
         });
     }
     //Update
-    updateThisAddress(id:string){
+    updateThisAddress(id:string,newAddress:Address){
         return Observable.create(observer => {
             this.afAuth.authState.subscribe(user => {
                 if (user){
-                    this.afStore.collection(`address`).ref.get().then(success => {
+                    this.afStore.collection(`address`).ref.doc(`${id}`).update(newAddress).then(success => {
                         observer.next(success);
                 }).catch(failure => {
                     observer.error(failure);

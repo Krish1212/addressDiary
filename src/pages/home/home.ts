@@ -102,12 +102,13 @@ export class HomePage {
       }]
     }).present();
   }
-  editAdd(address:object){
+  editAdd(address:any){
     this.toastCtrl.create({
       message: 'Edit record having: ' + address['id'],
       duration: 2000
     }).present();
-    this.navCtrl.push('edit-add');
+    //console.log(address.data());
+    this.navCtrl.push('edit-add', {'id':address['id'],'thisAddress': address.data()});
   }
 
 }

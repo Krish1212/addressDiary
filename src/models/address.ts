@@ -8,5 +8,6 @@ export interface Address{
   landline:string,
   mobile:string,
   email:string,
-  deleted:boolean
+  deleted:boolean,
+  favourite:boolean,
 }
