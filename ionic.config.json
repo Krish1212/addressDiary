@@ -1,6 +1,6 @@
 {
   "name": "addressDiary",
-  "app_id": "",
+  "app_id": "6534f209",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
