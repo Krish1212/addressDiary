@@ -13,6 +13,10 @@ export class FireAuthProvider {
 
   }
 
+  get currentUser():string {
+    return this.afAuth.auth.currentUser ? this.afAuth.auth.currentUser.uid : null;
+  }
+
   userLogin(user: User){
     return Observable.create(observer => {
       this.afAuth.auth.signInWithEmailAndPassword(user.email,user.password).then((authData) => {

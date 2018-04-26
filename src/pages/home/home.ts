@@ -11,6 +11,7 @@ import { AddProvider } from '../../providers/add/add';
 export class HomePage {
   loading:Loading;
   allAddress:any;
+  userID: string;
 
   constructor(public navCtrl: NavController, 
     private afAuth: FireAuthProvider,
@@ -18,13 +19,14 @@ export class HomePage {
     private toastCtrl:ToastController,
     private adProvider:AddProvider,
     private alertCtrl:AlertController) {
+      this.userID = this.afAuth.currentUser;
   }
   signOut(){
     this.afAuth.userSignOut();
     this.navCtrl.setRoot('login');
   }
   gotoAddNew(){
-    this.navCtrl.push('add-new');
+    this.navCtrl.push('add-new', {'user':this.userID});
   }
   getAllAddress(){
     this.loading = this.loadingCtrl.create({

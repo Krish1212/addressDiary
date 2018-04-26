@@ -13,6 +13,7 @@
   <ion-fab right bottom>
     <button ion-fab color="secondary" (click)="gotoAddNew()"><ion-icon name="md-add"></ion-icon></button>
   </ion-fab>
+  <p><strong>Welcome {{userID}}</strong></p>
   <button ion-button small outline (click)="getAllAddress()" type="submit">Show All</button>
   <div *ngIf="allAddress?.length > 0">
     <ion-card *ngFor="let item of allAddress">
@@ -34,13 +35,13 @@
         </p>
       </ion-card-content>
       <ion-row>
-        <ion-col>
+        <ion-col col-4>
           <button ion-button icon-left clear small (click)="deleteAdd(item.id)" color="danger"><ion-icon name="md-trash"></ion-icon>Delete</button>
         </ion-col>
-        <ion-col>
+        <ion-col col-4>
           <button ion-button icon-left clear small (click)="favAdd(item)" color="primary"><ion-icon [name]="(item.data().favourite) ? 'ios-heart' : 'ios-heart-outline'"></ion-icon>Favourite</button>
         </ion-col>
-        <ion-col>
+        <ion-col col-4>
           <button ion-button icon-left clear small (click)="editAdd(item)" color="secondary"><ion-icon name="ios-create-outline"></ion-icon>Edit</button>
         </ion-col>
       </ion-row>

@@ -10,4 +10,5 @@ export interface Address{
   email:string,
   deleted:boolean,
   favourite:boolean,
+  creator:string,
 }

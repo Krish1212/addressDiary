@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 import { EmailValidator } from '../../validators/email';
@@ -28,12 +28,15 @@ export class AddNewPage {
     email:AbstractControl;
     error:any;
     address = {} as Address;
+    userID:string;
   
-    constructor(public navCtrl: NavController,
+    constructor(public navCtrl: NavController, 
+      public navParams:NavParams,
       private formBuilder: FormBuilder,
       private loadingCtrl: LoadingController,
       private alertCtrl: AlertController,
       private adProvider:AddProvider) {
+        this.userID = this.navParams.get('user');
         this.addNewForm = this.formBuilder.group({
           'name':['',Validators.compose([Validators.required])],
           'addrln1':[''],
@@ -61,7 +64,7 @@ export class AddNewPage {
         spinner: 'bubbles',
       });
       if(this.addNewForm.valid){
-        this.address = {'name':this.name.value,'addrln1':this.addrln1.value,'addrln2':this.addrln2.value,'locality':this.locality.value,'city':this.city.value,'pincode':this.pincode.value,'landline':this.landline.value,'mobile':this.mobile.value,'email':this.email.value,"deleted":false, "favourite":false};
+        this.address = {'name':this.name.value,'addrln1':this.addrln1.value,'addrln2':this.addrln2.value,'locality':this.locality.value,'city':this.city.value,'pincode':this.pincode.value,'landline':this.landline.value,'mobile':this.mobile.value,'email':this.email.value,"deleted":false, "favourite":false, "creator":this.userID};
         this.adProvider.addNewAddress(this.address).subscribe(addr => {
           if(addr) {
             this.loading.dismiss().then(() => {

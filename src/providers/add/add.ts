@@ -32,7 +32,8 @@ export class AddProvider {
         return Observable.create(observer => {
             this.afAuth.authState.subscribe(user => {
                 if (user){
-                    this.afStore.collection(`address`).ref.get().then(success => {
+                    let userID = user.uid;
+                    this.afStore.collection(`address`).ref.where("creator","==",userID).get().then(success => {
                         observer.next(success);
                 }).catch(failure => {
                     observer.error(failure);
