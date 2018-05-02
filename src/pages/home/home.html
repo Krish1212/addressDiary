@@ -14,38 +14,15 @@
     <button ion-fab color="secondary" (click)="gotoAddNew()"><ion-icon name="md-add"></ion-icon></button>
   </ion-fab>
   <p><strong>Welcome {{userID}}</strong></p>
-  <button ion-button small outline (click)="getAllAddress()" type="submit">Show All</button>
+  <!--button ion-button small outline (click)="getAllAddress()" type="submit">Show All</button-->
+  <ion-searchbar (ionInput)="filter($event)"></ion-searchbar>
   <div *ngIf="allAddress?.length > 0">
-    <ion-card *ngFor="let item of allAddress">
-      <ion-card-content>
-        <ion-card-title>
-          {{item.data().name}}
-        </ion-card-title>
-        <p>
-          {{item.data().addrln1}}, {{item.data().addrln2}},
-        </p>
-        <p>
-          {{item.data().locality}}, {{item.data().city}} - {{item.data().pincode}}
-        </p>
-        <p>
-          <ion-icon name="md-call"></ion-icon> - {{item.data().landline}}  <ion-icon name="md-star"></ion-icon>  <ion-icon name="md-phone-portrait"></ion-icon> - {{item.data().mobile}}
-        </p>
-        <p>
-          Email - {{item.data().email}}
-        </p>
-      </ion-card-content>
-      <ion-row>
-        <ion-col col-4>
-          <button ion-button icon-left clear small (click)="deleteAdd(item.id)" color="danger"><ion-icon name="md-trash"></ion-icon>Delete</button>
-        </ion-col>
-        <ion-col col-4>
-          <button ion-button icon-left clear small (click)="favAdd(item)" color="primary"><ion-icon [name]="(item.data().favourite) ? 'ios-heart' : 'ios-heart-outline'"></ion-icon>Favourite</button>
-        </ion-col>
-        <ion-col col-4>
-          <button ion-button icon-left clear small (click)="editAdd(item)" color="secondary"><ion-icon name="ios-create-outline"></ion-icon>Edit</button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
+    <ion-list>
+      <ion-item *ngFor="let item of allAddress" (click)="viewAddress(item)">
+        <ion-icon name="ios-contact" item-start></ion-icon>
+        <p><strong>{{item.data().name}}</strong>, {{item.data().locality}}, {{item.data().city}}, {{item.data().mobile}}</p>
+      </ion-item>
+    </ion-list>
   </div>
   <div *ngIf="allAddress?.length == 0">
     <p><strong>No cards to display right now</strong></p>

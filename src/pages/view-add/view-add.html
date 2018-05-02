@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>View Address - {{item.data().name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        {{item.data().name}}
+      </ion-card-title>
+      <p>
+        {{item.data().addrln1}}, {{item.data().addrln2}},
+      </p>
+      <p>
+        {{item.data().locality}}, {{item.data().city}} - {{item.data().pincode}}
+      </p>
+      <p>
+        <ion-icon name="md-call"></ion-icon> - {{item.data().landline}}  <ion-icon name="md-star"></ion-icon>  <ion-icon name="md-phone-portrait"></ion-icon> - {{item.data().mobile}}
+      </p>
+      <p>
+        Email - {{item.data().email}}
+      </p>
+    </ion-card-content>
+    <ion-row>
+      <ion-col col-4>
+        <button ion-button icon-left clear small (click)="deleteAdd(item.id)" color="danger"><ion-icon name="md-trash"></ion-icon>Delete</button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-left clear small (click)="favAdd(item.id,addFav)" color="primary"><ion-icon [name]="(addFav) ? 'ios-heart' : 'ios-heart-outline'"></ion-icon>Favourite</button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button icon-left clear small (click)="editAdd(item)" color="secondary"><ion-icon name="ios-create-outline"></ion-icon>Edit</button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

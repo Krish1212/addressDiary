@@ -21,6 +21,9 @@ export class HomePage {
     private alertCtrl:AlertController) {
       this.userID = this.afAuth.currentUser;
   }
+  ionViewDidEnter(){
+    this.getAllAddress();
+  }
   signOut(){
     this.afAuth.userSignOut();
     this.navCtrl.setRoot('login');
@@ -61,56 +64,20 @@ export class HomePage {
       });
     });
   }
-  deleteAdd(id:string){
-    this.alertCtrl.create({
-      title: 'Delete Confirmation',
-      message: 'Do you really want to delete this address?',
-      buttons:[{
-        text: 'Cancel',
-        role: 'cancel',
-      },{
-        text:'Agree',
-        handler: () => {
-          this.loading = this.loadingCtrl.create({
-            content: 'Deleting the address...Please wait',
-            spinner: 'bubbles',
-          });
-          //Deleting from the server
-          this.adProvider.deleteThisAddress(id).subscribe(success => {
-            this.loading.dismiss().then(() => {
-              this.toastCtrl.create({
-                message: 'Delete record having: ' + id,
-                duration: 2000
-              }).present();
-            });
-            //Deleting from the gathered object
-            for(var i=0; i<this.allAddress.length; i++){
-              if(this.allAddress[i].id == id){
-                this.allAddress.splice(i,1);
-                break;
-              }
-            }
-          }, failure => {
-            this.alertCtrl.create({
-              message: 'Error: ' + failure.message,
-              buttons: [{
-                text: 'Ok',
-                role:'cancel'
-              }]
-            });
-          });
-          this.loading.present();
-        }
-      }]
-    }).present();
+
+  viewAddress(item:any){
+    this.navCtrl.push('view-add', {'viewThis':item});
   }
-  editAdd(address:any){
-    this.toastCtrl.create({
-      message: 'Edit record having: ' + address['id'],
-      duration: 2000
-    }).present();
-    //console.log(address.data());
-    this.navCtrl.push('edit-add', {'id':address['id'],'thisAddress': address.data()});
+  filter(ev){
+    //re-load all the contacts
+    let val = ev.target.value;
+    //filter the items here
+    if(val && val.trim() != '') {
+      this.allAddress = this.allAddress.filter((item) => {
+        return (item.data().name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+
   }
 
 }
