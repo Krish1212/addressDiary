@@ -20,7 +20,7 @@ export class HomePage {
     private adProvider:AddProvider,
     private alertCtrl:AlertController) {
       this.userID = this.afAuth.currentUser;
-  }
+    }
   ionViewDidEnter(){
     this.getAllAddress();
   }
@@ -64,20 +64,29 @@ export class HomePage {
       });
     });
   }
-
+  getAllFavAddress(getFav){
+    if(getFav){
+      this.allAddress = this.allAddress.filter((item) => {
+        return (item.data().favourite === true);
+      });
+    } else {
+      this.fetchAddress();
+    }
+  }
   viewAddress(item:any){
     this.navCtrl.push('view-add', {'viewThis':item});
   }
   filter(ev){
-    //re-load all the contacts
     let val = ev.target.value;
     //filter the items here
     if(val && val.trim() != '') {
       this.allAddress = this.allAddress.filter((item) => {
         return (item.data().name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+      });
+    } else {
+    //re-load all the contacts
+    this.fetchAddress();
     }
-
   }
 
 }

@@ -14,7 +14,10 @@
     <button ion-fab color="secondary" (click)="gotoAddNew()"><ion-icon name="md-add"></ion-icon></button>
   </ion-fab>
   <p><strong>Welcome {{userID}}</strong></p>
-  <!--button ion-button small outline (click)="getAllAddress()" type="submit">Show All</button-->
+  <ion-item>
+    <ion-label>Show Favourites</ion-label>
+    <ion-toggle [(ngModel)]="showFav" (click)="getAllFavAddress(showFav)"></ion-toggle>
+  </ion-item>
   <ion-searchbar (ionInput)="filter($event)"></ion-searchbar>
   <div *ngIf="allAddress?.length > 0">
     <ion-list>
