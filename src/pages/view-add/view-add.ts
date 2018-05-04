@@ -25,6 +25,10 @@ export class ViewAddPage {
     this.addFav = this.item.data().favourite;
   }
   deleteAdd(id:string){
+    this.loading = this.loadingCtrl.create({
+      content: 'Deleting the address...Please wait',
+      spinner: 'bubbles',
+    });
     this.alertCtrl.create({
       title: 'Delete Confirmation',
       message: 'Do you really want to delete this address?',
@@ -32,17 +36,39 @@ export class ViewAddPage {
         text: 'Cancel',
         role: 'cancel',
       },{
-        text:'Agree',
+        text: 'Mark as deleted',
         handler: () => {
-          this.loading = this.loadingCtrl.create({
-            content: 'Deleting the address...Please wait',
-            spinner: 'bubbles',
+          let updated = this.item.data();
+          updated.deleted = true;
+          //This will mark the address for deletion and retain in the database
+          this.adProvider.updateThisAddress(id,updated).subscribe(success => {
+            this.loading.dismiss().then(() => {
+              this.toastCtrl.create({
+                message: 'Marked for deletion',
+                duration:2000,
+                position: 'middle',
+              }).present();
+              this.navCtrl.popToRoot();
+            }, failure => {
+              this.alertCtrl.create({
+                message: 'Error ' + failure.message,
+                buttons: [{
+                  text: 'Ok',
+                  role: 'cancel'
+                }]
+              }).present();
+            });
           });
+          this.loading.present();
+        }
+      }, {
+        text:'Delete completely',
+        handler: () => {
           //Deleting from the server
           this.adProvider.deleteThisAddress(id).subscribe(success => {
             this.loading.dismiss().then(() => {
               this.toastCtrl.create({
-                message: 'Delete record having: ' + id,
+                message: 'Deleted successfully',
                 duration: 2000
               }).present();
             });
@@ -54,7 +80,7 @@ export class ViewAddPage {
                 text: 'Ok',
                 role:'cancel'
               }]
-            });
+            }).present();
           });
           this.loading.present();
         }

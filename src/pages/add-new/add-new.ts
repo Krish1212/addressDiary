@@ -77,6 +77,7 @@ export class AddNewPage {
               }).present();
             });
             this.resetForm();
+            this.navCtrl.popToRoot();
           }
         }, addrError => {
           this.alertCtrl.create({

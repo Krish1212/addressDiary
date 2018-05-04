@@ -23,8 +23,11 @@
       </p>
     </ion-card-content>
     <ion-row>
-      <ion-col col-4>
+      <ion-col col-4 *ngIf="!(item.data().deleted)">
         <button ion-button icon-left clear small (click)="deleteAdd(item.id)" color="danger"><ion-icon name="md-trash"></ion-icon>Delete</button>
+      </ion-col>
+      <ion-col col-4 *ngIf="item.data().deleted">
+        <button ion-button icon-left clear small (click)="deleteAdd(item.id)" color="danger"><ion-icon name="md-trash"></ion-icon>Purge</button>
       </ion-col>
       <ion-col col-4>
         <button ion-button icon-left clear small (click)="favAdd(item.id,addFav)" color="primary"><ion-icon [name]="(addFav) ? 'ios-heart' : 'ios-heart-outline'"></ion-icon>Favourite</button>

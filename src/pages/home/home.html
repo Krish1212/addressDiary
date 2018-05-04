@@ -23,7 +23,8 @@
     <ion-list>
       <ion-item *ngFor="let item of allAddress" (click)="viewAddress(item)">
         <ion-icon name="ios-contact" item-start></ion-icon>
-        <p><strong>{{item.data().name}}</strong>, {{item.data().locality}}, {{item.data().city}}, {{item.data().mobile}}</p>
+        <p *ngIf="!(item.data().deleted)" ><strong>{{item.data().name}}</strong>, {{item.data().locality}}, {{item.data().city}}, {{item.data().mobile}}</p>
+        <p *ngIf="(item.data().deleted)" ><strong>{{item.data().name}}</strong> - Marked for deletion</p>
       </ion-item>
     </ion-list>
   </div>
