@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 import { User } from '../../models/user';
+import { Profile } from '../../models/userProfile';
 
 @Injectable()
 export class FireAuthProvider {
@@ -20,7 +21,9 @@ export class FireAuthProvider {
   userLogin(user: User){
     return Observable.create(observer => {
       this.afAuth.auth.signInWithEmailAndPassword(user.email,user.password).then((authData) => {
-        observer.next(authData);
+        this.ngFirestore.collection(`usersProfile`).doc(authData.uid).ref.get().then((userName) => {
+          observer.next(userName);
+        });
       }).catch((error) => {
         observer.error(error);
       });
@@ -39,6 +42,16 @@ export class FireAuthProvider {
 
   userSignOut(){
     return this.afAuth.auth.signOut();
+  }
+
+  userNameAdd(profile:Profile){
+    return Observable.create(observer => {
+      this.ngFirestore.collection(`usersProfile`).doc(`${profile.userID}`).set({'userName':profile.userName}).then((success) => {
+        observer.next(success);
+      }).catch((failure) => {
+        observer.error(failure);
+      });
+    });
   }
 
 }

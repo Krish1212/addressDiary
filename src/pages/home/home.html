@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Address Diary - Home</ion-title>
     <ion-buttons end>
       <button ion-button clear icon-right (click)="signOut()">
         <ion-icon name="md-power"></ion-icon>
@@ -13,13 +13,13 @@
   <ion-fab right bottom>
     <button ion-fab color="secondary" (click)="gotoAddNew()"><ion-icon name="md-add"></ion-icon></button>
   </ion-fab>
-  <p><strong>Welcome {{userID}}</strong></p>
-  <ion-item>
-    <ion-label>Show Favourites</ion-label>
-    <ion-toggle [(ngModel)]="showFav" (click)="getAllFavAddress(showFav)"></ion-toggle>
-  </ion-item>
-  <ion-searchbar (ionInput)="filter($event)"></ion-searchbar>
+  <p><strong>Welcome {{userName}}</strong></p>
   <div *ngIf="allAddress?.length > 0">
+    <ion-item>
+      <ion-label>Show Favourites</ion-label>
+      <ion-toggle [(ngModel)]="showFav" (click)="getAllFavAddress(showFav)"></ion-toggle>
+    </ion-item>
+    <ion-searchbar (ionInput)="filter($event)"></ion-searchbar>
     <ion-list>
       <ion-item *ngFor="let item of allAddress" (click)="viewAddress(item)">
         <ion-icon name="ios-contact" item-start></ion-icon>

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Register</ion-title>
+    <ion-title>Address Diary - Register</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,14 +10,21 @@
 <ion-content padding>
   <form [formGroup]="signupForm" novalidate>
     <ion-item>
-      <ion-label floating>Email</ion-label>
+      <ion-label stacked>Name</ion-label>
+      <ion-input #name formControlName="name" type="text" [class.invalid]="!signupForm.controls.name.valid && signupForm.controls.name.touched"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!signupForm.controls.name.valid && signupForm.controls.name.touched">
+      Name is required
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
       <ion-input #username formControlName="username" type="email" [class.invalid]="!signupForm.controls.username.valid && signupForm.controls.username.touched"></ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="!signupForm.controls.username.valid && signupForm.controls.username.touched">
       Please enter a valid email
     </ion-item>
     <ion-item>
-      <ion-label floating>Password</ion-label>
+      <ion-label stacked>Password</ion-label>
       <ion-input #password formControlName="password" type="password" [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.touched"></ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid && signupForm.controls.password.touched">

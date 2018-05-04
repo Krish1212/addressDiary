@@ -44,7 +44,7 @@ export class LoginPage {
     if(this.loginForm.valid){
       this.user = {'email': this.username.value, 'password': this.password.value};
       this.afAuth.userLogin(this.user).subscribe(authUser => {
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(HomePage, {'userName':authUser.data().userName});
       }, authError => {
         let errorMessage:string = authError.message;
         this.loading.dismiss().then(() => {
