@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Loading, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, Loading, LoadingController, ToastController, AlertController, Events } from 'ionic-angular';
 
 import { FireAuthProvider } from '../../providers/fire-auth/fire-auth';
 import { AddProvider } from '../../providers/add/add';
@@ -20,12 +20,17 @@ export class HomePage {
     private loadingCtrl:LoadingController,
     private toastCtrl:ToastController,
     private adProvider:AddProvider,
-    private alertCtrl:AlertController) {
+    private alertCtrl:AlertController, 
+    private events:Events) {
       this.userID = this.afAuth.currentUser;
-      this.userName = this.navParams.get('userName');
-      console.log(this.userName);
+      this.userName = this.navParams.get('userInfo');
+      this.events.publish("userInfo", this.userName );
     }
   ionViewDidEnter(){
+    this.events.subscribe("userInfo", (username) => {
+      this.userName = username;
+    });
+    console.log(this.userName);
     this.getAllAddress();
   }
   signOut(){
